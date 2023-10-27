@@ -1,6 +1,8 @@
 # Dev Data Stores
 data
 
+.env
+
 # Logs
 logs
 *.log
