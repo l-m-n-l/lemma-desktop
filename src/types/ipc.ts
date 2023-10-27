@@ -1,5 +1,6 @@
 export enum IPCChannel {
-    NEDB = "nedb"
+    NEDB = "nedb",
+    APP = "app"
 }
 
 export interface MessageQueueType {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { InteractionsProps } from './interactions';
+import { InteractionsProps, SideNavButton } from './interactions';
 
 export interface ContainerProps {
     pattern?: string
@@ -7,12 +7,10 @@ export interface ContainerProps {
 
 export const MainContainer = styled.div`
     width: 100vw;
-    height: 100vh;
+    flex: 1;
     background-color: white;
-    position: absolute;
-    left: 0;
-    top: 0;
     display: flex;
+    box-sizing: border-box;
 `;
 
 export const LoginContainer = styled.div`
@@ -41,7 +39,7 @@ export const TopNavContainer = styled(NavContainer)`
 `;
 
 export const SideNavContainer = styled(NavContainer)`
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     border-right: 1px solid lightgray;
@@ -52,4 +50,50 @@ export const SideNavInterior = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+`;
+
+export const GraphNavContainer = styled(SideNavContainer)`
+    display: flex;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+`;
+
+export const ContentContainer = styled.div`
+    flex: 1;
+    height: 100%;
+    position: relative;
+`;
+
+export const FooterContainer= styled.div`
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+`;
+
+export const FooterSearchContainer = styled.form`
+    width: 50%;
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 1rem;
+    display: flex;
+    margin-bottom: 1rem;
+`;
+
+export const TitleBarContainer = styled.div`
+    width: 100vw;
+    padding: 0.7rem;
+    background-color: white;
+    z-index: 100;
+    -webkit-app-region: drag;
+`;
+
+export const WindowButtonGroupContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 `;

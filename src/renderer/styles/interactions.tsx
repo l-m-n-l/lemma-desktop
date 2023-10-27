@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export interface InteractionsProps {
     backgroundColor?: string,
-    isValid?: boolean
+    isValid?: boolean,
+    windowButtonType?: string
 }
 
 export const LoginInput = styled.input<InteractionsProps>`
@@ -54,5 +55,44 @@ export const SideNavButton = styled.button<InteractionsProps>`
     &:hover {
         background-color: ${(props) => (props.isValid) ? "black" : "rgb(0, 0, 0, 0.1)"};
         transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const NoBorderInput = styled.input`
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+`;
+
+export const SubmitButton = styled.button<InteractionsProps>`
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: ${(props) => (props.isValid) ? "black" : "lightgray"};
+    border-radius: 0.5rem;
+    color: ${(props) => (props.isValid) ? "white" : "gray"};
+`;
+
+export const WindowButton = styled.button<InteractionsProps>`
+    border-radius: 10000px;
+    width: 0.7rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background-color: ${(props) => (props.windowButtonType === "quit") ? "#FF605C" : (props.windowButtonType === "maximize") ? "#00CA4E" : "#FFBD44"};
+    color: black;
+    -webkit-app-region: no-drag;
+    font-size: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        color: rgb(255, 255, 255, 1);
     }
 `;

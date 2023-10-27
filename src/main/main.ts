@@ -23,6 +23,7 @@ import {
   NeDBArgType
 } from '../types/storage';
 import { IPCChannel } from '../types/ipc';
+import { initializeIpcManager } from './ipc';
 
 class AppUpdater {
   constructor() {
@@ -34,41 +35,43 @@ class AppUpdater {
 
 export let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('nedb', async (event, arg: Array<NeDBArgType>) => {
-  console.log("nedb_event_args", arg);
-  const {
-    id,
-    method,
-    args: {
-      ds,
-      document,
-      query
-    }
-  } = arg[0];
+// ipcMain.on('nedb', async (event, arg: Array<NeDBArgType>) => {
+//   console.log("nedb_event_args", arg);
+//   const {
+//     id,
+//     method,
+//     args: {
+//       ds,
+//       document,
+//       query
+//     }
+//   } = arg[0];
 
-  switch(method) {
-    case "create":
-      {
-        const data = await createNeDBDocument(ds, document);
-        event.sender.send(IPCChannel.NEDB, {
-          id,
-          data
-        })
-        return
-      }
-    case "find":
-      {
-        const data = await findNeDBDocument(ds, query);
-        event.sender.send(IPCChannel.NEDB, {
-          id,
-          data
-        })
-        return
-      }
-    default:
-      return
-  };
-});
+//   switch(method) {
+//     case "create":
+//       {
+//         const data = await createNeDBDocument(ds, document);
+//         event.sender.send(IPCChannel.NEDB, {
+//           id,
+//           data
+//         })
+//         return
+//       }
+//     case "find":
+//       {
+//         const data = await findNeDBDocument(ds, query);
+//         event.sender.send(IPCChannel.NEDB, {
+//           id,
+//           data
+//         })
+//         return
+//       }
+//     default:
+//       return
+//   };
+// });
+
+initializeIpcManager();
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -113,6 +116,7 @@ const createWindow = async () => {
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),
+    frame: false,
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')

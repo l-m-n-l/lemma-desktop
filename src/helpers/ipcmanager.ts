@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import { AppEventsIpcListener } from '../main/ipc';
 import { MessageQueueType, IPCChannel } from '../types/ipc';
 
 export const messageQueues = {
-    nedb: {} as MessageQueueType
+    nedb: {} as MessageQueueType,
+    app: {} as MessageQueueType
 };
 
 export const sendIPCMessage = (channel: IPCChannel, data: any, callback: (data: any) => void) => {
@@ -26,5 +28,7 @@ const NeDBEventListener = (response: { id: string, data: Object | Array<Object> 
     }
 };
 
+
+
 // @ts-ignore
-window.electron.ipcRenderer.on(IPCChannel.NEDB, NeDBEventListener)
+window.electron.ipcRenderer.on(IPCChannel.NEDB, NeDBEventListener);

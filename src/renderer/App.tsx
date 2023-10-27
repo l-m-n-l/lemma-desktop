@@ -3,6 +3,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import useDataStoreFlags from '../hooks/useDataStoreFlags';
 import useUserManifest from '../hooks/useUserManifest';
+import MainLayout from './components/layouts/main';
 import Graph from './pages/graph';
 
 // Pages
@@ -35,8 +36,8 @@ const UnAuthedRouter = () => {
 export default function App() {
   // @ts-ignore
   const { isUserDataLoading, isLoggedIn } = useDataStoreFlags();
-  const { user, functions } = useUserManifest();
-
-  // render relevant page/router
-  return (isUserDataLoading) ? <Loading /> : (isLoggedIn) ?  <AppRouter /> : <UnAuthedRouter />
+  
+  return <MainLayout>
+    {(isUserDataLoading) ? <Loading /> : (isLoggedIn) ?  <AppRouter /> : <UnAuthedRouter />}
+  </MainLayout>
 }
