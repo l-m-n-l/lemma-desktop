@@ -2,9 +2,12 @@ import React, { FormEvent, useState } from 'react';
 import { LoginContainer, PatternedMainContainer } from '../styles/containers';
 import { AppSignInButton, LoginButton, LoginInput } from '../styles/interactions';
 import { TailSpin } from 'react-loader-spinner';
-import { createNeDBDocument, DataStores } from '../../helpers/storage';
+import { createNeDBDocument } from '../../helpers/storage';
+import useUserManifest from '../../hooks/useUserManifest';
 
 const LoginPage = () => {
+    const { user, functions, flags } = useUserManifest();
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,8 +31,6 @@ const LoginPage = () => {
             })
         })
 
-        console.log("response", response)
-
         if(response.status === 400) {
             setIsLoading(false);
             setIsEmailValid(false);
@@ -37,12 +38,21 @@ const LoginPage = () => {
         }
 
         else {
-            const { authorization, user_id } = await response.json();
-
-            createNeDBDocument(DataStores.user, {
+            const { 
+                authorization, 
                 user_id,
-                authorization
-            });
+                user_email,
+                user_name,
+                time
+            } = await response.json();
+
+            await functions?.storeUser({
+                authorization,
+                id: user_id,
+                name: user_name,
+                email: user_email,
+                time
+            })
         }
     };
 

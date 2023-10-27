@@ -12,7 +12,17 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import { resolveHtmlPath } from './util';
 import MenuBuilder from './menu';
+import {
+  createNeDBDocument,
+  findNeDBDocument,
+} from './storage';
+import {
+  DataStores,
+  NeDBArgType
+} from '../types/storage';
+import { IPCChannel } from '../types/ipc';
 
 class AppUpdater {
   constructor() {
@@ -24,8 +34,40 @@ class AppUpdater {
 
 export let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('toNeDBInterface', async (event, arg) => {
-  console.log("event", event)
+ipcMain.on('nedb', async (event, arg: Array<NeDBArgType>) => {
+  console.log("nedb_event_args", arg);
+  const {
+    id,
+    method,
+    args: {
+      ds,
+      document,
+      query
+    }
+  } = arg[0];
+
+  switch(method) {
+    case "create":
+      {
+        const data = await createNeDBDocument(ds, document);
+        event.sender.send(IPCChannel.NEDB, {
+          id,
+          data
+        })
+        return
+      }
+    case "find":
+      {
+        const data = await findNeDBDocument(ds, query);
+        event.sender.send(IPCChannel.NEDB, {
+          id,
+          data
+        })
+        return
+      }
+    default:
+      return
+  };
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -76,8 +118,7 @@ const createWindow = async () => {
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
       nodeIntegration: true,
-      contextIsolation: false,
-
+      contextIsolation: true
     },
   });
 

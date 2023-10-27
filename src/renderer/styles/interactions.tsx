@@ -11,7 +11,7 @@ export const LoginInput = styled.input<InteractionsProps>`
     width: 20rem;
     border-radius: 0.5rem;
     outline: none;
-    border: ${(props) => (props.isValid === false) ? "2px solid #e32200" : "2px solid gray"};
+    border: ${(props) => (props.isValid === false) ? "2px solid red" : "2px solid gray"};
 
     &:focus {
         border: ${(props) => (props.isValid === false) ? "2px solid #e32200" : "2px solid black"};

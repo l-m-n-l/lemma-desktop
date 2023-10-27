@@ -1,24 +1,58 @@
 import { app } from 'electron';
 import Datastore from 'nedb';
+import { DataStores } from '../types/storage';
+import crypto from 'crypto';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const UserDataStore = new Datastore({ 
-    filename: `${process.env.NODE_ENV === 'dev' ? '.' : app.getAppPath()}/data/user.db`, 
-    autoload: true 
+    filename: `${process.env.NODE_ENV === 'development' ? '.' : app.getAppPath()}/data/user.db`, 
+    autoload: true,
+    // afterSerialization: (plaintext) => {
+    //     const key = Buffer.from(process.env.LOCAL_KEY as string, 'hex')
+    //     const iv = crypto.randomBytes(16)
+	// 	const aes = crypto.createCipheriv('aes-256-cbc', key, iv)
+	// 	let ciphertext = aes.update(plaintext)
+	// 	ciphertext = Buffer.concat([iv, ciphertext, aes.final()])
+	// 	return ciphertext.toString('base64')
+    // },
+    // beforeDeserialization: (ciphertext) => {
+    //     const key = Buffer.from(process.env.LOCAL_KEY as string, 'hex')
+    //     const ciphertextBytes = Buffer.from(ciphertext, 'base64')
+	// 	const iv = ciphertextBytes.slice(0, 16)
+	// 	const data = ciphertextBytes.slice(16)
+	// 	const aes = crypto.createDecipheriv('aes-256-cbc', key, iv)
+	// 	let plaintextBytes = Buffer.from(aes.update(data))
+	// 	plaintextBytes = Buffer.concat([plaintextBytes, aes.final()])
+	// 	return plaintextBytes.toString()
+    // }
 });
   
 export const OfflineDataStore = new Datastore({
-    filename: `${process.env.NODE_ENV === 'dev' ? '.' : app.getAppPath()}/data/offline_manifest.db`,
-    autoload: true
+    filename: `${process.env.NODE_ENV === 'development' ? '.' : app.getAppPath()}/data/offline_manifest.db`,
+    autoload: true,
+    // afterSerialization: (plaintext) => {
+    //     const iv = crypto.randomBytes(16)
+	// 	const aes = crypto.createCipheriv('aes-256-cbc', process.env.LOCAL_KEY as string, iv)
+	// 	let ciphertext = aes.update(plaintext)
+	// 	ciphertext = Buffer.concat([iv, ciphertext, aes.final()])
+	// 	return ciphertext.toString('base64')
+    // },
+    // beforeDeserialization: (ciphertext) => {
+    //     const ciphertextBytes = Buffer.from(ciphertext, 'base64')
+	// 	const iv = ciphertextBytes.slice(0, 16)
+	// 	const data = ciphertextBytes.slice(16)
+	// 	const aes = crypto.createDecipheriv('aes-256-cbc', process.env.LOCAL_KEY as string, iv)
+	// 	let plaintextBytes = Buffer.from(aes.update(data))
+	// 	plaintextBytes = Buffer.concat([plaintextBytes, aes.final()])
+	// 	return plaintextBytes.toString()
+    // }
 });
 
 const stores = {
     user: UserDataStore,
     offline: OfflineDataStore
-}
-
-export enum DataStores {
-    user = "user",
-    offline = "offline"
 }
 
 export const createNeDBDocument = (ds: DataStores, document: any) => {
