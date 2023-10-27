@@ -38,3 +38,21 @@ export const AppSignInButton = styled.button<InteractionsProps>`
     border-radius: 0.5rem;
     border: none;
 `;
+
+export const SideNavButton = styled.button<InteractionsProps>`
+    font-size: 1.25rem;
+    background-color: ${(props) => (props.isValid) ? "black" : "transparent"};
+    border: none;
+    border-radius: 1rem;
+    color: ${(props) => (props.isValid) ? "white" : "black"};;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+
+    &:hover {
+        background-color: ${(props) => (props.isValid) ? "black" : "rgb(0, 0, 0, 0.1)"};
+        transition: all 0.3s ease 0.1s;
+    }
+`;
