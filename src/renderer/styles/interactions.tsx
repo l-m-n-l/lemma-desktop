@@ -96,3 +96,23 @@ export const WindowButton = styled.button<InteractionsProps>`
         color: rgb(255, 255, 255, 1);
     }
 `;
+
+export const SettingsButton = styled.button<InteractionsProps>`
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 12rem;
+    display: flex;
+    justify-content: left;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: ${(props) => (props.isValid) ? "black" : "transparent"};
+    color: ${(props) => (props.isValid) ? "white" : "gray"};
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${(props) => (props.isValid) ? "black" : "rgb(0, 0, 0, 0.1)"};
+        transition: all 0.3s ease 0.1s;
+    }
+`;

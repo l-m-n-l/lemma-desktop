@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route, useRoutes } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import useDataStoreFlags from '../hooks/useDataStoreFlags';
 import useUserManifest from '../hooks/useUserManifest';
@@ -12,14 +12,24 @@ import Loading from './pages/loading';
 import Login from './pages/login';
 import Profile from './pages/profile';
 
+const AppRoutes = () => {
+  useRoutes([
+    "/profile",
+    "/profile/settings",
+    "/profile/integrations",
+    "/profile/billing"
+  ].map((path) => ({path, element: <Profile />})));
+
+  return <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/graph" element={<Graph />} />
+  </Routes>
+}
+
 // App Router
 const AppRouter = () => {
     return <Router>
-      <Routes>
-        <Route path="/graph" element={<Graph />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <AppRoutes />
     </Router>
 };
 

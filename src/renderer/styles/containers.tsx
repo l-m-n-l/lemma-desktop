@@ -97,3 +97,33 @@ export const WindowButtonGroupContainer = styled.div`
     align-items: center;
     gap: 0.5rem;
 `;
+
+export const NoteBookNodeContainer = styled.div`
+    width: 3rem;
+    height: 3rem;
+    background-color: #454545;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+`;
+
+export const SpaceNodeContainer = styled.div`
+    width: 3rem;
+    height: 3rem;
+    background-color: #454545;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+`;
+
+export const NodeTitleContainer = styled.div`
+    width: 150%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: -1rem;
+`;
