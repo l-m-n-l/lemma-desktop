@@ -64,6 +64,7 @@ export const NoBorderInput = styled.input`
     font-size: 1rem;
     border: none;
     outline: none;
+    user-select: none;
 `;
 
 export const SubmitButton = styled.button<InteractionsProps>`

@@ -3,6 +3,7 @@ import { InteractionsProps, SideNavButton } from './interactions';
 
 export interface ContainerProps {
     pattern?: string
+    isHovering?: boolean
 }
 
 export const MainContainer = styled.div`
@@ -107,6 +108,11 @@ export const NoteBookNodeContainer = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        transition: all 0.3s ease 0.1s;
+    }
 `;
 
 export const SpaceNodeContainer = styled.div`
@@ -118,6 +124,10 @@ export const SpaceNodeContainer = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+
+    &:hover {
+
+    }
 `;
 
 export const NodeTitleContainer = styled.div`
@@ -126,4 +136,25 @@ export const NodeTitleContainer = styled.div`
     display: flex;
     justify-content: center;
     bottom: -1rem;
+`;
+
+export const GraphNodeDnD = styled.div`
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    cursor: grab;
+    border: none;
+
+    &:hover {
+
+    }
+`;
+
+export const SpaceGraphNodeDnd = styled(GraphNodeDnD)`
+    background-color: #454545;
+    border-radius: 100%;
+`;
+
+export const NoteBookGraphNodeDnd = styled(GraphNodeDnD)`
+    background-color: #454545;
+    border-radius: 0.5rem;
 `;

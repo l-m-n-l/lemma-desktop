@@ -39,6 +39,9 @@ const nodeTypes = {
     notebook: NoteBookNode
 };
 
+let id = 0;
+const getId = () => `dndnode_${id++}`;
+
 const MainGraph = ({ ...props }: MainGraphProps) => {
     const reactFlowWrapper = useRef(null);
 
@@ -89,7 +92,8 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
             // @ts-ignore
             onNodeChange={onNodesChange}
             onEdgesChange={onEdgesChange}
-            onInit={reactFlowInstance}
+            // @ts-ignore
+            onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
             fitView

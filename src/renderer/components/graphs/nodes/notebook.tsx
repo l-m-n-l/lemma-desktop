@@ -3,8 +3,6 @@ import * as emoji from 'node-emoji'
 import { NodeTitle } from '../../../styles/typography';
 import { NoteBookNodeContainer, NodeTitleContainer } from '../../../styles/containers';
 
-
-
 const NoteBookNode = ({ data }) => {
     return (
         <NoteBookNodeContainer>
