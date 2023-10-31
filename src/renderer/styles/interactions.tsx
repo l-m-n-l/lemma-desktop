@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
 
 export interface InteractionsProps {
     backgroundColor?: string,
@@ -115,5 +116,60 @@ export const SettingsButton = styled.button<InteractionsProps>`
     &:hover {
         background-color: ${(props) => (props.isValid) ? "black" : "rgb(0, 0, 0, 0.1)"};
         transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const MenuButton = styled.button<InteractionsProps>`
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    -webkit-app-region: no-drag;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const SpaceNodeButton = styled(animated.button)`
+    width: 2rem;
+    height: 2rem;
+    background-color: #454545;
+    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #6C63FF;
+    }
+`;
+
+export const NoteBookNodeButton = styled(animated.button)`
+    width: 2rem;
+    height: 2rem;
+    background-color: #454545;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #6C63FF;
     }
 `;

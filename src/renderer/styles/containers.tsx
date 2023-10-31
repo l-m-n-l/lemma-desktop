@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
+
 import { InteractionsProps, SideNavButton } from './interactions';
 
 export interface ContainerProps {
     pattern?: string
     isHovering?: boolean
+    side?: "right" | "left"
 }
 
 export const MainContainer = styled.div`
@@ -87,10 +90,13 @@ export const FooterSearchContainer = styled.form`
 
 export const TitleBarContainer = styled.div`
     width: 100vw;
-    padding: 0.7rem;
+    padding: 0.3rem;
     background-color: white;
     z-index: 100;
     -webkit-app-region: drag;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
 `;
 
 export const WindowButtonGroupContainer = styled.div`
@@ -99,43 +105,26 @@ export const WindowButtonGroupContainer = styled.div`
     gap: 0.5rem;
 `;
 
-export const NoteBookNodeContainer = styled.div`
-    width: 3rem;
-    height: 3rem;
-    background-color: #454545;
-    border-radius: 0.5rem;
+export const NoteBookNodeContainer = styled(animated.div)`
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-
-    &:hover {
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        transition: all 0.3s ease 0.1s;
-    }
 `;
 
-export const SpaceNodeContainer = styled.div`
-    width: 3rem;
-    height: 3rem;
-    background-color: #454545;
-    border-radius: 100%;
+export const SpaceNodeContainer = styled(animated.div)`
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-
-    &:hover {
-
-    }
 `;
 
-export const NodeTitleContainer = styled.div`
-    width: 150%;
+export const NodeTitleContainer = styled(animated.div)`
+    width: 300%;
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: -1rem;
+    bottom: -0.75rem;
 `;
 
 export const GraphNodeDnD = styled.div`
@@ -152,9 +141,25 @@ export const GraphNodeDnD = styled.div`
 export const SpaceGraphNodeDnd = styled(GraphNodeDnD)`
     background-color: #454545;
     border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0, 0);
 `;
 
 export const NoteBookGraphNodeDnd = styled(GraphNodeDnD)`
     background-color: #454545;
     border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0, 0);
+`;
+
+export const TitleBarModalContainer = styled.div<ContainerProps>`
+    position: absolute;
+`;
+
+export const DrawerContainer = styled.div<ContainerProps>`
+    height: 100%;
 `;

@@ -4,12 +4,14 @@ import { IPCChannel } from '../../../types/ipc';
 
 import { TitleBarContainer } from '../../styles/containers';
 import WindowButtonGroup from '../groups/mainWindowButtons';
-import MenuButtonGroup from '../groups/menuButtons';
+import {
+    DocumentMenuButtons
+} from '../groups/menuButtons';
 
 const TitleBar = () => {    
     return <TitleBarContainer>
         <WindowButtonGroup />
-        <MenuButtonGroup />
+        <DocumentMenuButtons />
     </TitleBarContainer>
 };
 

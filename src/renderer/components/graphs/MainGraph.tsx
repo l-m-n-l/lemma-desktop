@@ -1,11 +1,16 @@
 import React, { useState, useCallback, useRef } from 'react';
 
-import ReactFlow, { Background, applyNodeChanges, applyEdgeChanges, Edge } from 'reactflow';
+import ReactFlow, { 
+    Background, 
+    applyNodeChanges, 
+    applyEdgeChanges, 
+    Edge
+} from 'reactflow';
 import 'reactflow/dist/style.css';
 import { ContentContainer } from '../../styles/containers';
 import FooterSearch from '../search/footer';
-import NoteBookNode from './nodes/notebook';
-import SpaceNode from './nodes/space';
+import NoteBookNode from './nodes/NotebookNode';
+import SpaceNode from './nodes/SpaceNode';
 
 interface MainGraphProps {
 
@@ -45,25 +50,35 @@ const getId = () => `dndnode_${id++}`;
 const MainGraph = ({ ...props }: MainGraphProps) => {
     const reactFlowWrapper = useRef(null);
 
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
+    const [nodes, setNodes] = useState([]);
+    const [edges, setEdges] = useState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
     // @ts-ignore
-    const onNodesChange = useCallback( (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),[]);
-    // @ts-ignore
-    const onEdgesChange = useCallback( (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),[]);
+    const onNodesChange = useCallback((changes: any) => {
+        console.log("nodeChanges", changes)
+        // @ts-ignore
+        setNodes((nds) => applyNodeChanges(changes, nds))
+    }, [setNodes]);
+    // @ts-ignore 
+    const onEdgesChange = useCallback((changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)), []);
 
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
-    }, []);
+    }, [setEdges]);
 
     const onDrop = useCallback((event) => {
         event.preventDefault();
 
+        console.log("nodeDropEvent", event);
+
         const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-        const type = event.dataTransfer.getData('application/reactflow');
+        const {
+            icon,
+            title,
+            type
+        } = JSON.parse(event.dataTransfer.getData('application/reactflow'));
   
         // check if the dropped element is valid
         if (typeof type === 'undefined' || !type) {
@@ -78,11 +93,26 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
           id: getId(),
           type,
           position,
-          data: { label: `${type} node` },
+          data: {
+              icon,
+              title
+          },
         };
   
         setNodes((nds) => nds.concat(newNode));
-    }, [reactFlowInstance])
+    }, [reactFlowInstance]);
+
+    const onNodeClick = (event, element) => {
+        const {
+            type,
+            id,
+            data,
+            position,
+            selected
+        } = element;
+
+        console.log("nodeClickElement", element)
+    }
 
     return <ContentContainer ref={reactFlowWrapper}>
         <ReactFlow
@@ -96,6 +126,9 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            onNodeClick={onNodeClick}
+            nodesDraggable={true}
+            elementsSelectable={true}
             fitView
         >
             <Background />

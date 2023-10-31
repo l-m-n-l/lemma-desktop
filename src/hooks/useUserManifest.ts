@@ -38,7 +38,8 @@ const useUserManifest = () => {
                 }
             } = _UserManifest;
 
-            console.log("userManifest", _UserManifest)
+            _ContextFunctions?.setIsUserDataLoading(false);
+            _ContextFunctions?.setIsLoggedIn(true);
         }
 
         else {
