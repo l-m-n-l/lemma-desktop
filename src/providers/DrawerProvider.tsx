@@ -21,7 +21,7 @@ export const DrawerProvider = ({ children } : { children: ReactNode }) => {
         }
     };
 
-    <DrawerContext.Provider value={ContextValue}>
+    return <DrawerContext.Provider value={ContextValue}>
         {children}
     </DrawerContext.Provider>
 };

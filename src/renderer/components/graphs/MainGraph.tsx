@@ -130,6 +130,12 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
             onDrop={onDrop}
             onDragOver={onDragOver}
             onNodeClick={onNodeClick}
+            onClick={() => {
+                modalContext?.fns.setModalType(null);
+                modalContext?.fns.setIsOpen(false);
+                modalContext?.fns.setClientX(null);
+                modalContext?.fns.setClientY(null);
+            }}
             nodesDraggable={true}
             elementsSelectable={true}
             fitView

@@ -124,7 +124,7 @@ export const MenuButton = styled.button<InteractionsProps>`
     display: flex;
     align-items: center;
     gap: 0.2rem;
-    background-color: transparent;
+    background-color: ${(props) => (props.isValid) ? "rgb(0, 0, 0, 0.1)" : "transparent"};
     border: none;
     outline: none;
     -webkit-app-region: no-drag;
@@ -170,6 +170,6 @@ export const NoteBookNodeButton = styled(animated.button)`
     cursor: pointer;
 
     &:hover {
-        background-color: #6C63FF;
+        background-color: #FFA500;
     }
 `;

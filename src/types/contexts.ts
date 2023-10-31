@@ -26,8 +26,7 @@ export interface ModalContextProps {
 }
 
 export enum DrawerType {
-    signout = "signout",
-    share = "share"
+    history = "history"
 }
 
 export interface DrawerDataType {

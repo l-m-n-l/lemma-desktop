@@ -5,6 +5,7 @@ import { NodeTitle } from '../../../styles/typography';
 import { useSpring, animated } from 'react-spring';
 import { SpaceNodeButton } from '../../../styles/interactions';
 import { ModalContext } from '../../../../providers/ModalProvider';
+import { NodeNotificationBadge } from '../../badges/NotificationBadge';
 
 const NoteBookNode = ({ data }) => {
     const modalContext= useContext(ModalContext);
@@ -21,6 +22,7 @@ const NoteBookNode = ({ data }) => {
 
     return (
         <SpaceNodeContainer>
+            <NodeNotificationBadge count={10} />
             <SpaceNodeButton
                 style={{
                     transform: buttonProps.scale.interpolate(scale => `scale(${scale})`),

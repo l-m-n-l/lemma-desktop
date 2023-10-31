@@ -6,6 +6,8 @@ import { NoteBookNodeContainer, NodeTitleContainer } from '../../../styles/conta
 import { NoteBookNodeButton } from '../../../styles/interactions';
 import { useSpring, animated } from 'react-spring';
 import { ModalContext } from '../../../../providers/ModalProvider';
+import { NodeNotificationBadge } from '../../badges/NotificationBadge';
+import { ModalType } from '../../../../types/contexts';
 
 const NoteBookNode = ({ data }) => {
     const modalContext= useContext(ModalContext);
@@ -22,6 +24,7 @@ const NoteBookNode = ({ data }) => {
     
     return (
         <NoteBookNodeContainer>
+            <NodeNotificationBadge count={3} />
             <NoteBookNodeButton
                 style={{
                     transform: buttonProps.scale.interpolate(scale => `scale(${scale})`),
@@ -35,10 +38,12 @@ const NoteBookNode = ({ data }) => {
                     setButtonProps({ scale: 1.1 });
                 }}
                 onMouseMove={(e) => {
-                    modalContext?.fns.setModalType("nodeHover");
-                    modalContext?.fns.setIsOpen(true);
-                    modalContext?.fns.setClientX(e.clientX);
-                    modalContext?.fns.setClientY(e.clientY);
+                    if(modalContext?.vars.isOpen && modalContext?.vars.type === ModalType.nodeHover) {
+                        modalContext?.fns.setModalType("nodeHover");
+                        modalContext?.fns.setIsOpen(true);
+                        modalContext?.fns.setClientX(e.clientX);
+                        modalContext?.fns.setClientY(e.clientY);
+                    }
                 }}
                 onMouseLeave={() => {
                     setTitleProps({ y: 0 })

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { ModalContext } from '../../../providers/ModalProvider';
 import { ModalType } from '../../../types/contexts';
-import { HoverModalContainer } from '../../styles/containers';
+import { HoverModalContainer, NodeHoverModalSectionContainer } from '../../styles/containers';
 import {useSpring, animated, config} from 'react-spring';
+import { NodeModalHoverSectionTitle } from '../../styles/typography';
 
 const NodeHoverModal = () => {
     const modalContext = useContext(ModalContext);
@@ -16,7 +17,12 @@ const NodeHoverModal = () => {
         top: modalContext?.vars.clientY + "px",
         ...fade
     }}>
-        
+        <NodeHoverModalSectionContainer>
+            <NodeModalHoverSectionTitle>Contributors</NodeModalHoverSectionTitle>
+        </NodeHoverModalSectionContainer>
+        <NodeHoverModalSectionContainer>
+            <NodeModalHoverSectionTitle>Alerts</NodeModalHoverSectionTitle>
+        </NodeHoverModalSectionContainer>
     </HoverModalContainer> : <></>
 };
 

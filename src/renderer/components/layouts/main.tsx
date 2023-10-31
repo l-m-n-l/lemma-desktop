@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import TitleBar from '../nav/titlebar';
 import NodeHoverModal from '../../components/modals/NodeHoverModal';
+import ShareModal from '../modals/ShareModal';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
     return <div style={{
@@ -21,9 +22,15 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
                 position: "relative"
             }}
         >
+            {/* Title Bar */}
             <TitleBar />
+
+            {/* App */}
             {children}
+
+            {/* Modals */}
             <NodeHoverModal />
+            <ShareModal />
         </div>
     </div>
 };

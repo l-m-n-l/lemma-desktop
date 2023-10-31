@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import "react-tooltip/dist/react-tooltip.css";
 
-import { PiGraphBold, PiHouseBold, PiUserCircleBold, PiQuestionBold } from 'react-icons/pi';
+import { PiGraphBold, PiHouseBold, PiUserCircleBold, PiQuestionBold, PiGear, PiGearBold } from 'react-icons/pi';
 
 import { SideNavContainer, SideNavInterior } from '../../styles/containers';
 import { SideNavButton } from '../../styles/interactions';
@@ -50,11 +50,12 @@ const SideNavigation = () => {
                 <PiUserCircleBold />
             </SideNavButton>
             <SideNavButton 
-                data-tooltip-content={"FAQ"} 
+                data-tooltip-content={"Settings"} 
                 data-tooltip-id={"info-tooltip-1"}
-                isValid={false}
+                isValid={location.pathname.includes("/settings")}
+                onClick={() => navigate("/profile")}
             >
-                <PiQuestionBold />
+                <PiGearBold />
             </SideNavButton>
             <ReactTooltip 
                 style={{ fontFamily: "Roboto, sans-serif", backgroundColor: "black", color: "white" }} 

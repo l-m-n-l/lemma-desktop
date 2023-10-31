@@ -1,21 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { DrawerContainer } from '../../styles/containers';
 import { useSpring, animated } from 'react-spring';
-import { ModalContext } from '../../../providers/ModalProvider';
+import { DrawerContext } from '../../../providers/DrawerProvider';
+import { DrawerType } from '../../../types/contexts';
 
 const HistoryDrawer = () => {
-    const modalContext = useContext(ModalContext);
+    const drawerContext = useContext(DrawerContext);
 
-    console.log("modalContext", modalContext);
+    useEffect(() => {
+        console.log("drawerContext", drawerContext)
+    }, [drawerContext])
 
-    // const animation = useSpring({
-    //     transform: isOpen ? `translateX(0)` : `translateX(100%)`,
-    //     config: { mass: 1, tension: 280, friction: 60 },
-    // });
+    const animation = useSpring({
+        transform: (drawerContext?.vars.type === DrawerType.history && drawerContext?.vars.isOpen) ? `translateX(0)` : `translateX(100%)`,
+        config: { mass: 1, tension: 280, friction: 30 },
+    });
 
-    return <DrawerContainer side={"right"}>
-
-    </DrawerContainer>
+    return (drawerContext?.vars.type === DrawerType.history && drawerContext?.vars.isOpen) ? <DrawerContainer style={animation}>
+        
+    </DrawerContainer> : <></>
 };
 
 export default HistoryDrawer;

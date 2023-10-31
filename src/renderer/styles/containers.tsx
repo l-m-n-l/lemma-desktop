@@ -80,7 +80,7 @@ export const FooterContainer= styled.div`
 
 export const FooterSearchContainer = styled.form`
     width: 50%;
-    padding: 1rem;
+    padding: 0.75rem;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 1rem;
@@ -97,6 +97,7 @@ export const TitleBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
 `;
 
 export const WindowButtonGroupContainer = styled.div`
@@ -166,6 +167,14 @@ export const TitleBarModalContainer = styled.div<ContainerProps>`
 
 export const DrawerContainer = styled(animated.div)`
     height: 100%;
+    width: 30rem;
+    border-left: 1px solid lightgray;
+    box-sizing: border-box;
+    padding: 1rem;
+`;
+
+export const DrawerContainerHeader = styled.div`
+
 `;
 
 export const HoverModalContainer = styled(animated.div)`
@@ -176,5 +185,44 @@ export const HoverModalContainer = styled(animated.div)`
     position: absolute;
     z-index: 100;
     border-radius: 1rem;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+    padding: 1rem;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const NodeBadgeContainer = styled.div`
+    position: absolute;
+    top: -0.3rem;
+    right: -0.3rem;
+    width: 1rem;
+    aspect-ratio: 1 / 1;
+    background-color: #F9C11D;
+    border-radius: 10000px;
+    z-index: 3;
+    font-size: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto, sans-serif;
+`;
+
+export const NodeHoverModalSectionContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const ShareModalContainer = styled(animated.div)`
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+    width: 30rem;
+    height: 5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border: 1px solid lightgray;
 `;
