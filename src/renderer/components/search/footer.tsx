@@ -8,10 +8,22 @@ import { getRandomIcon, getRandomName } from '../../../helpers/util';
 
 import * as emoji from 'node-emoji';
 
+import { useSpring, animated } from 'react-spring';
+
 import { NoBorderInput, SubmitButton } from '../../styles/interactions';
 import { FooterContainer, FooterSearchContainer, SpaceGraphNodeDnd, NoteBookGraphNodeDnd } from '../../styles/containers';
 
 const FooterSearch = () => {
+    const [spaceNodeProps, setSpaceNodeProps] = useSpring(() => ({
+        scale: 1,
+        config: { mass: 5, tension: 350, friction: 40 },
+    }));
+
+    const [noteBookNodeProps, setNoteBookNodeProps] = useSpring(() => ({
+        scale: 1,
+        config: { mass: 5, tension: 350, friction: 40 },
+    }));
+    
     const [query, setQuery] = useState<string>("");
     const [isValidQuery, setIsValidQuery] = useState<boolean>(false);
 
@@ -55,6 +67,15 @@ const FooterSearch = () => {
                     height: "100%"
                 }} />
                 <SpaceGraphNodeDnd
+                    style={{
+                        transform: spaceNodeProps.scale.interpolate(scale => `scale(${scale})`),
+                    }}
+                    onMouseEnter={() => {
+                        setSpaceNodeProps({ scale: 1.1 })
+                    }}
+                    onMouseLeave={() => {
+                        setSpaceNodeProps({ scale: 1 })
+                    }}
                     data-tooltip-content={"Drag to Create New Space"} 
                     data-tooltip-id={"info-tooltip-2"} 
                     onDragStart={(e) => onDragStart(e, JSON.stringify({
@@ -67,7 +88,16 @@ const FooterSearch = () => {
                 >
                     {emoji.get(spaceNodeIcon)}
                 </SpaceGraphNodeDnd>
-                <NoteBookGraphNodeDnd 
+                <NoteBookGraphNodeDnd
+                    style={{
+                        transform: noteBookNodeProps.scale.interpolate(scale => `scale(${scale})`),
+                    }}
+                    onMouseEnter={() => {
+                        setNoteBookNodeProps({ scale: 1.1 })
+                    }}
+                    onMouseLeave={() => {
+                        setNoteBookNodeProps({ scale: 1 })
+                    }}
                     data-tooltip-content={"Drag to Create New Notebook"} 
                     data-tooltip-id={"info-tooltip-2"}
                     onDragStart={(e) => onDragStart(e, JSON.stringify({

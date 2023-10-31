@@ -120,46 +120,61 @@ export const SpaceNodeContainer = styled(animated.div)`
 `;
 
 export const NodeTitleContainer = styled(animated.div)`
-    width: 300%;
+    width: max-content;
     position: absolute;
     display: flex;
     justify-content: center;
     bottom: -0.75rem;
 `;
 
-export const GraphNodeDnD = styled.div`
+export const GraphNodeDnD = styled(animated.div)`
     width: 2rem;
     aspect-ratio: 1 / 1;
     cursor: grab;
     border: none;
-
-    &:hover {
-
-    }
 `;
 
 export const SpaceGraphNodeDnd = styled(GraphNodeDnD)`
-    background-color: #454545;
+    background-color: lightgray;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: translate(0, 0);
+
+    &:hover {
+        background-color: #454545;
+    }
 `;
 
 export const NoteBookGraphNodeDnd = styled(GraphNodeDnD)`
-    background-color: #454545;
+    background-color: lightgray;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: translate(0, 0);
+
+    &:hover {
+        background-color: #454545;
+    }
 `;
 
 export const TitleBarModalContainer = styled.div<ContainerProps>`
     position: absolute;
 `;
 
-export const DrawerContainer = styled.div<ContainerProps>`
+export const DrawerContainer = styled(animated.div)`
     height: 100%;
+`;
+
+export const HoverModalContainer = styled(animated.div)`
+    background-color: white;
+    width: 20rem;
+    height: 20rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: absolute;
+    z-index: 100;
+    border-radius: 1rem;
+    border: 1px solid lightgray;
 `;

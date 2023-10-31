@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'reactflow/dist/style.css';
 import * as emoji from 'node-emoji'
 import { NodeTitle } from '../../../styles/typography';
 import { NoteBookNodeContainer, NodeTitleContainer } from '../../../styles/containers';
 import { NoteBookNodeButton } from '../../../styles/interactions';
 import { useSpring, animated } from 'react-spring';
+import { ModalContext } from '../../../../providers/ModalProvider';
 
 const NoteBookNode = ({ data }) => {
+    const modalContext= useContext(ModalContext);
+
     const [buttonProps, setButtonProps] = useSpring(() => ({
         scale: 1,
         config: { mass: 5, tension: 350, friction: 40 },
@@ -23,13 +26,33 @@ const NoteBookNode = ({ data }) => {
                 style={{
                     transform: buttonProps.scale.interpolate(scale => `scale(${scale})`),
                 }}
-                onMouseEnter={() => {
-                    setTitleProps({ y: 5 })
-                    setButtonProps({ scale: 1.1 })
+                onMouseEnter={(e) => {
+                    setTitleProps({ y: 5 });
+                    modalContext?.fns.setModalType("nodeHover");
+                    modalContext?.fns.setIsOpen(true);
+                    modalContext?.fns.setClientX(e.clientX);
+                    modalContext?.fns.setClientY(e.clientY);
+                    setButtonProps({ scale: 1.1 });
+                }}
+                onMouseOver={(e) => {
+                    modalContext?.fns.setModalType("nodeHover");
+                    modalContext?.fns.setIsOpen(true);
+                    modalContext?.fns.setClientX(e.clientX);
+                    modalContext?.fns.setClientY(e.clientY);
                 }}
                 onMouseLeave={() => {
                     setTitleProps({ y: 0 })
+                    modalContext?.fns.setModalType(null);
+                    modalContext?.fns.setIsOpen(false);
+                    modalContext?.fns.setClientX(null);
+                    modalContext?.fns.setClientY(null);
                     setButtonProps({ scale: 1 })
+                }}
+                onDragStart={() => {
+                    modalContext?.fns.setModalType(null);
+                    modalContext?.fns.setIsOpen(false);
+                    modalContext?.fns.setClientX(null);
+                    modalContext?.fns.setClientY(null);
                 }}
             >
                 {emoji.get(data.icon)}

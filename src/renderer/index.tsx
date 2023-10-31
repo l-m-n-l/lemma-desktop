@@ -6,13 +6,16 @@ import TitleBar from './components/nav/titlebar';
 
 import { Provider as ReduxProvider } from 'react-redux';
 import ReduxStore from '../providers/redux/store';
+import { ModalProvider } from '../providers/ModalProvider';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
 root.render(
-  <DataStoreProvider>
-    <ReduxProvider store={ReduxStore} >
-      <App />
-    </ReduxProvider>
-  </DataStoreProvider>
+  <ReduxProvider store={ReduxStore}>
+    <DataStoreProvider>
+      <ModalProvider>
+        <App />
+      </ModalProvider>
+    </DataStoreProvider>
+  </ReduxProvider>
 );

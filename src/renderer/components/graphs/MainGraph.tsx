@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useContext } from 'react';
 
 import ReactFlow, { 
     Background, 
@@ -7,6 +7,7 @@ import ReactFlow, {
     Edge
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { ModalContext } from '../../../providers/ModalProvider';
 import { ContentContainer } from '../../styles/containers';
 import FooterSearch from '../search/footer';
 import NoteBookNode from './nodes/NotebookNode';
@@ -48,6 +49,8 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const MainGraph = ({ ...props }: MainGraphProps) => {
+    const modalContext = useContext(ModalContext);
+
     const reactFlowWrapper = useRef(null);
 
     const [nodes, setNodes] = useState([]);
@@ -56,7 +59,7 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
 
     // @ts-ignore
     const onNodesChange = useCallback((changes: any) => {
-        console.log("nodeChanges", changes)
+        modalContext?.fns.setIsOpen(false);
         // @ts-ignore
         setNodes((nds) => applyNodeChanges(changes, nds))
     }, [setNodes]);
@@ -120,7 +123,7 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
             edges={edges}
             nodeTypes={nodeTypes}
             // @ts-ignore
-            onNodeChange={onNodesChange}
+            onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             // @ts-ignore
             onInit={setReactFlowInstance}
