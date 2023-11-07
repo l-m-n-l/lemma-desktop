@@ -57,6 +57,7 @@ const tabSlice = createSlice({
                     page: {}
                 }
             });
+            state.selectedTabId = current_tabs.length - 1;
             state.tabs = current_tabs;
         },
 

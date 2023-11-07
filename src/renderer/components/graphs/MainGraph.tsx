@@ -12,6 +12,7 @@ import { ContentContainer } from '../../styles/containers';
 import FooterSearch from '../search/footer';
 import NoteBookNode from './nodes/NotebookNode';
 import SpaceNode from './nodes/SpaceNode';
+import GraphNav from '../nav/graph';
 
 interface MainGraphProps {
 
@@ -118,6 +119,10 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
     }
 
     return <ContentContainer ref={reactFlowWrapper}>
+        <GraphNav 
+            graphIcon={"unicorn"}
+            graphTitle={"This is a Graph"}
+        />
         <ReactFlow
             nodes={nodes}
             edges={edges}

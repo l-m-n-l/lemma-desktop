@@ -267,3 +267,50 @@ export const MinimizeTitleBarButton = styled.button`
     font-size: 0.5rem;
     cursor: pointer;
 `;
+
+export const GraphBackButton = styled.button`
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;         
+    }
+`;
+
+export const GraphIconButton = styled.button`
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;         
+    }
+`;
+
+export const GraphTitleButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;         
+    }
+`;

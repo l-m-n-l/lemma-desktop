@@ -60,9 +60,11 @@ export const SideNavInterior = styled.div`
 export const GraphNavContainer = styled(SideNavContainer)`
     display: flex;
     position: absolute;
-    height: 100%;
+    z-index: 299;
+    width: 100%;
     top: 0;
-    right: 0;
+    flex-direction: row;
+    height: min-content;
 `;
 
 export const ContentContainer = styled.div`
@@ -292,4 +294,9 @@ export const TitleBarInterior = styled.div`
 
 export const ContextMenuModalContainer = styled.div`
     
+`;
+
+export const GraphInfoContainer = styled.div`
+    display: flex;
+    align-items: center;
 `;

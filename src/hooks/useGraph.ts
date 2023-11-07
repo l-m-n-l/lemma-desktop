@@ -1,19 +1,43 @@
-import { useContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    useLazyFindGraphQuery
+} from '../providers/redux/services/graph';
 
-interface useGraphProps {
-    graphId: string
-}
+const useGraph = (graphId: string) => {
+    const dispatch = useDispatch();
+    const cachedGraph = useSelector((state) => state.graph.graphs[graphId]);
 
-const useGraph = ({ ...props } : useGraphProps) => {
-    const { graphId } = props;
+    const [] = useState();
+    const [nodes, setNodes] = useState();
+    const [edges, setEdges] = useState();
 
-    const nodes = useSelector((state) => state.graphs[props.graphId].nodes);
-    const edges = useSelector(() => state.graphs[props.graphId].edges);
+    const [findGraph, { ...findGraphFlags }] = useLazyFindGraphQuery();
 
     useEffect(() => {
+        if(cachedGraph) {
+            setNodes(cachedGraph.nodes);
+            setEdges(cachedGraph.edges);
+        }
 
-    }, []);
+        else {
+            const fetchGraph = async () => {
+                const fetchRes = await findGraph({
+                    graphId
+                });
+            }
+
+            fetchGraph();
+        }
+    }, [graphId]);
+
+    const updateNodes = () => {
+        
+    };
+
+    const updateEdges = () => {
+
+    }
 
     return {
         data: {
@@ -21,7 +45,8 @@ const useGraph = ({ ...props } : useGraphProps) => {
             edges
         },
         fns: {
-
+            updateNodes,
+            updateEdges
         }
     }
 };
