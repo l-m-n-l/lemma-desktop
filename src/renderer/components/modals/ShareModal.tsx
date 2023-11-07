@@ -17,6 +17,19 @@ const ShareModal = () => {
 
     const modalRef = useRef();
 
+    useMemo(() => {
+        function handleClickOutside(event) {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                modalContext?.fns.setIsOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [modalContext]);
+
     return (modalContext?.vars.type === ModalType.share && modalContext?.vars.isOpen) ? <ShareModalContainer style={fade} ref={modalRef}>
 
     </ShareModalContainer> : <></>

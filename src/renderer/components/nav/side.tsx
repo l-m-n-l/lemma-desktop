@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import "react-tooltip/dist/react-tooltip.css";
@@ -7,20 +8,34 @@ import "react-tooltip/dist/react-tooltip.css";
 import { PiGraphBold, PiHouseBold, PiUserCircleBold, PiQuestionBold, PiGear, PiGearBold } from 'react-icons/pi';
 
 import { SideNavContainer, SideNavInterior } from '../../styles/containers';
-import { SideNavButton } from '../../styles/interactions';
+import { MinimizeNavButton, SideNavButton } from '../../styles/interactions';
+import { updateTabInfo } from '../../../providers/redux/slicers/tabs';
+
+import { FaAnglesRight, FaAnglesLeft } from 'react-icons/fa6';
 
 const SideNavigation = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
-    return <SideNavContainer>
+    const [isHidden, setIsHidden] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
+
+    return <SideNavContainer onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
         {/* Navigation Buttons */}
         <SideNavInterior>
             <SideNavButton 
                 data-tooltip-content={"Home"} 
                 data-tooltip-id={"info-tooltip-1"}
                 isValid={location.pathname === "/"} 
-                onClick={() => navigate("/")}
+                onClick={() => {
+                    dispatch(updateTabInfo({
+                        tabTitle: "Home",
+                        tabIcon: "system-home",
+                        tabURI: "/"
+                    }));
+                    navigate("/");
+                }}
             >
                 <PiHouseBold />
             </SideNavButton>
@@ -28,7 +43,14 @@ const SideNavigation = () => {
                 data-tooltip-content={"Graph"} 
                 data-tooltip-id={"info-tooltip-1"}
                 isValid={location.pathname === "/graph"} 
-                onClick={() => navigate("/graph")}
+                onClick={() => {
+                    dispatch(updateTabInfo({
+                        tabTitle: "Graph",
+                        tabIcon: "system-graph",
+                        tabURI: "/graph"
+                    }));
+                    navigate("/graph");
+                }}
             >
                 <PiGraphBold />
             </SideNavButton>
@@ -45,7 +67,14 @@ const SideNavigation = () => {
                 data-tooltip-content={"My Profile"} 
                 data-tooltip-id={"info-tooltip-1"}
                 isValid={location.pathname === "/profile"} 
-                onClick={() => navigate("/profile")}
+                onClick={() => {
+                    dispatch(updateTabInfo({
+                        tabTitle: "Profile",
+                        tabIcon: "system-profile",
+                        tabURI: "/profile"
+                    }));
+                    navigate("/profile");
+                }}
             >
                 <PiUserCircleBold />
             </SideNavButton>
@@ -53,7 +82,14 @@ const SideNavigation = () => {
                 data-tooltip-content={"Settings"} 
                 data-tooltip-id={"info-tooltip-1"}
                 isValid={location.pathname.includes("/settings")}
-                onClick={() => navigate("/profile")}
+                onClick={() => {
+                    dispatch(updateTabInfo({
+                        tabTitle: "Settings",
+                        tabIcon: "system-settings",
+                        tabURI: "/settings"
+                    }));
+                    navigate("/settings");
+                }}
             >
                 <PiGearBold />
             </SideNavButton>
@@ -63,6 +99,11 @@ const SideNavigation = () => {
                 id={"info-tooltip-1"}
             />
         </SideNavInterior>
+        {
+            (isHovering) ? <MinimizeNavButton onClick={() => {
+
+            }}><FaAnglesLeft /></MinimizeNavButton> : <></>
+        }
     </SideNavContainer>
 };
 

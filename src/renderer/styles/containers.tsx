@@ -34,7 +34,7 @@ export const PatternedMainContainer = styled(MainContainer)`
 `;
 
 export const NavContainer = styled.div<InteractionsProps>`
-    padding: 1rem;
+    padding: 0.5rem;
     box-sizing: border-box;
 `;
 
@@ -46,8 +46,9 @@ export const SideNavContainer = styled(NavContainer)`
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid lightgray;
+    border-right: 0.5px solid lightgray;
     justify-content: space-between;
+    position: relative;
 `;
 
 export const SideNavInterior = styled.div`
@@ -90,14 +91,11 @@ export const FooterSearchContainer = styled.form`
 
 export const TitleBarContainer = styled.div`
     width: 100vw;
-    padding: 0.3rem;
-    background-color: white;
-    z-index: 100;
-    -webkit-app-region: drag;
     display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    border-bottom: 1px solid lightgray;
+    flex-direction: column;
+    background-color: white;
+    border-bottom: 0.5px solid lightgray;
+    position: relative;
 `;
 
 export const WindowButtonGroupContainer = styled.div`
@@ -168,13 +166,18 @@ export const TitleBarModalContainer = styled.div<ContainerProps>`
 export const DrawerContainer = styled(animated.div)`
     height: 100%;
     width: 30rem;
-    border-left: 1px solid lightgray;
+    border-left: 0.5px solid lightgray;
     box-sizing: border-box;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
 `;
 
-export const DrawerContainerHeader = styled.div`
-
+export const DrawerHeaderContainer = styled.div`
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
 `;
 
 export const HoverModalContainer = styled(animated.div)`
@@ -225,4 +228,68 @@ export const ShareModalContainer = styled(animated.div)`
     height: 5rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border: 1px solid lightgray;
+`;
+
+export const TabsNavContainer = styled.div`
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    box-sizing: border-box;
+    padding-bottom: 0.3rem;
+`;
+
+export const TabContainer = styled.div<InteractionsProps>`
+    flex: 1;
+    max-width: 10rem;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 0.3rem;
+    border: ${(props) => (props.isValid) ? "1px solid lightgray" : ""};
+    display: flex;
+    box-shadow: ${(props) => (props.isValid) ? "rgba(0, 0, 0, 0.16) 0px 1px 4px" : ""};
+    box-sizing: border-box;
+    transform: translate(0, 0);
+
+    &:hover {
+        background-color: ${(props) => (!props.isValid) ? "rgb(0, 0, 0, 0.1)" : ""};
+        transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const TabTitleContainer = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    cursor: pointer;
+    height: 100%;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+`;
+
+export const TitleDragContainer = styled.div`
+    -webkit-app-region: drag;
+    width: 100vw;
+    background-color: white;
+    height: 0.5rem;
+`;
+
+export const TitleBarInterior = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    -webkit-app-region: nodrag;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+    align-items: center;
+`;
+
+export const ContextMenuModalContainer = styled.div`
+    
 `;

@@ -42,10 +42,10 @@ export const AppSignInButton = styled.button<InteractionsProps>`
 `;
 
 export const SideNavButton = styled.button<InteractionsProps>`
-    font-size: 1.25rem;
+    font-size: 1rem;
     background-color: ${(props) => (props.isValid) ? "black" : "transparent"};
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     color: ${(props) => (props.isValid) ? "white" : "black"};;
     cursor: pointer;
     display: flex;
@@ -131,6 +131,7 @@ export const MenuButton = styled.button<InteractionsProps>`
     padding: 0.5rem;
     cursor: pointer;
     border-radius: 0.3rem;
+    user-select: none;
 
     &:hover {
         background-color: rgb(0, 0, 0, 0.1);
@@ -172,4 +173,97 @@ export const NoteBookNodeButton = styled(animated.button)`
     &:hover {
         background-color: #FFA500;
     }
+`;
+
+export const DrawerMinimizeButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: min-content;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;   
+    }
+`;
+
+export const DrawerSearch = styled.input`
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+`;
+
+export const TabCloseButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+`;
+
+export const AddTabButton = styled.button`
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const MinimizeNavButton = styled.button`
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    top: 2rem;
+    right: -23px;
+    border-left: 1px solid white;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    background-color: white;
+    outline: none;
+    z-index: 301;
+    border-top-right-radius: 100rem;
+    border-bottom-right-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    cursor: pointer;
+`;
+
+export const MinimizeTitleBarButton = styled.button`
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    left: 5rem;
+    bottom: -23px;
+    border-left: 1px solid lightgray;
+    border-top: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    background-color: white;
+    outline: none;
+    z-index: 301;
+    border-bottom-left-radius: 100rem;
+    border-bottom-right-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    cursor: pointer;
 `;

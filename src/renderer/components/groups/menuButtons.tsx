@@ -9,13 +9,27 @@ import { PiShareFatBold, PiClockClockwiseBold } from 'react-icons/pi';
 import { WindowButtonGroupContainer } from '../../styles/containers';
 import { MenuButton } from '../../styles/interactions';
 import { ModalContext } from '../../../providers/ModalProvider';
+import useTabs from '../../../hooks/useTabs';
 
 import { ModalType, DrawerType } from '../../../types/contexts';
 import { DrawerContext } from '../../../providers/DrawerProvider';
+import { setDrawerState, setModalState } from '../../../providers/redux/slicers/tabs';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const DocumentMenuButtons = () => {
-    const modalContext = useContext(ModalContext);
-    const drawerContext = useContext(DrawerContext);
+    const dispatch = useDispatch();
+
+    const tabs = useSelector((state) => state.tabs.tabs);
+    const selectedTabId = useSelector((state) => state.tabs.selectedTabId);
+    const {
+        state: {
+            drawer: {
+                isOpen,
+                type,
+                data
+            }
+        }
+    } = tabs[selectedTabId];
 
     const validPathNames = [
         "/graph",
@@ -23,29 +37,32 @@ export const DocumentMenuButtons = () => {
     ];
 
     return <WindowButtonGroupContainer style={{
-        gap: "0.1rem"
+        gap: "0.1rem",
+        paddingBottom: "0.3rem"
     }}>
         <MenuButton
             onClick={() => {
-                modalContext?.fns.setModalType(!(modalContext?.vars.isOpen && modalContext?.vars.type === ModalType.share) ? ModalType.share : null);
-                modalContext?.fns.setIsOpen(!(modalContext?.vars.isOpen && modalContext?.vars.type === ModalType.share));
-                modalContext?.fns.setModalData();
+                dispatch(setModalState({
+                    type: !(isOpen && type === ModalType.share),
+                    isOpen: !(type === ModalType.share && isOpen)
+                }));
             }}
             data-tooltip-content={"Share or Publish"} 
-            data-tooltip-id={(modalContext?.vars.type === ModalType.share && modalContext?.vars.isOpen) ? "" : "info-tooltip-3"}
-            isValid={modalContext?.vars.isOpen && modalContext?.vars.type === ModalType.share}
+            data-tooltip-id={(isOpen && type === ModalType.share) ? "" : "info-tooltip-3"}
+            isValid={type === ModalType.share && isOpen}
         >
             Share
         </MenuButton>
         <MenuButton
             onClick={() => {
-                drawerContext?.fns.setDrawerType(!(drawerContext?.vars.isOpen && drawerContext?.vars.type === DrawerType.history) ? DrawerType.history : null);
-                drawerContext?.fns.setIsOpen(!(drawerContext?.vars.isOpen && drawerContext?.vars.type === DrawerType.history));
-                // drawerContext?.fns.setDrawerData();
+                dispatch(setDrawerState({
+                    type: !(isOpen && type === DrawerType.history) ? DrawerType.history : null,
+                    isOpen: !(type === DrawerType.history && isOpen)
+                }));
             }}
             data-tooltip-content={"View Change History"} 
             data-tooltip-id={"info-tooltip-3"}
-            isValid={drawerContext?.vars.isOpen && drawerContext?.vars.type === DrawerType.history}
+            isValid={type === DrawerType.history && isOpen}
         >
             <PiClockClockwiseBold />
         </MenuButton>

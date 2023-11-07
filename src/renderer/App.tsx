@@ -29,16 +29,20 @@ const AppRoutes = () => {
 // App Router
 const AppRouter = () => {
     return <Router>
-      <AppRoutes />
+      <MainLayout>
+        <AppRoutes />
+      </MainLayout>
     </Router>
 };
 
 // Router for Unauthorized users
 const UnAuthedRouter = () => {
     return <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-      </Routes>
+      <MainLayout>
+        <Routes>
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </MainLayout>
     </Router>
 };
 
@@ -47,7 +51,5 @@ export default function App() {
   // @ts-ignore
   const { isUserDataLoading, isLoggedIn } = useDataStoreFlags();
   
-  return <MainLayout>
-    {(isUserDataLoading) ? <Loading /> : (isLoggedIn) ?  <AppRouter /> : <UnAuthedRouter />}
-  </MainLayout>
+  return (isUserDataLoading) ? <Loading /> : (isLoggedIn) ?  <AppRouter /> : <UnAuthedRouter />
 }
