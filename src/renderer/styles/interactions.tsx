@@ -333,4 +333,18 @@ export const CreateGraphButton = styled.button`
     }
 `;
 
-export const GraphTileButton = styled.button``;
+export const GraphTileButton = styled.button`
+    width: 9rem;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    border-radius: 2rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;
+    }
+`;

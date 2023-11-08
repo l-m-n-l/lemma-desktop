@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { DataStoreContext } from '../providers/DataStoreProvider';
@@ -16,13 +16,15 @@ const useGraphs = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const graphs = useSelector((state) => state.graph.graphs);
+    const _graphs = useSelector((state) => state.graph.graphs);
 
     const _DataStoreContext = useContext(DataStoreContext);
     const _NeDBFunctions = _DataStoreContext?.NeDBFunctions;
 
     const [findGraphs, { ...findGraphFlags }] = useLazyFindGraphsQuery();
     const [_createGraph, { ...createGraphFlags }] = useCreateGraphMutation();
+
+    const [graphs, setGraphs] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,7 +68,7 @@ const useGraphs = () => {
     
     return {
         data: {
-            graphs
+            graphs: Object.values(_graphs)
         },
         fns: {
             createGraph

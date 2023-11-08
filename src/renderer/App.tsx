@@ -13,17 +13,14 @@ import Login from './pages/login';
 import Profile from './pages/profile';
 
 const AppRoutes = () => {
-  useRoutes([
-    "/profile",
-    "/profile/settings",
-    "/profile/integrations",
-    "/profile/billing"
-  ].map((path) => ({path, element: <Profile />})));
-
   return <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/graph" element={<Graph />} />
+    <Route path="/graph/" element={<Graph />} />
+    <Route path="/graph/:graphId" element={<Graph />} />
     <Route path="/profile" element={<Profile />} />
+    <Route path="/profile/settings" element={<Profile />} />
+    <Route path="/profile/integrations" element={<Profile />} />
+    <Route path="/profile/billing" element={<Profile />} />
   </Routes>
 }
 

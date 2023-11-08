@@ -1,15 +1,17 @@
 import React from 'react';
 
+import * as emoji from 'node-emoji';
+
 import { CenteredContentInterior, ContentContainer, MainContainer, ObjectsContainer, PageTextHeaderContainer } from '../styles/containers';
 
 import MainGraph from '../components/graphs/MainGraph';
 import SideNavigation from '../components/nav/side';
 import GraphNavigation from '../components/nav/graph';
 import HistoryDrawer from '../components/drawers/HistoryDrawer';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useGraph from '../../hooks/useGraph';
-import { PageTextHeader, PageTextSubHeader } from '../styles/typography';
-import { CreateGraphButton } from '../styles/interactions';
+import { GraphTileTitle, PageTextHeader, PageTextSubHeader } from '../styles/typography';
+import { CreateGraphButton, GraphTileButton } from '../styles/interactions';
 import { PiPlus } from 'react-icons/pi';
 import useGraphs from '../../hooks/useGraphs';
 import CreateGraphModal from '../components/modals/CreateGraph';
@@ -30,6 +32,8 @@ const Graph = ({ ...props } : GraphProps) => {
 }
 
 const GraphLanding = () => {
+    const navigate = useNavigate();
+
     const {
         data: {
             graphs
@@ -58,8 +62,26 @@ const GraphLanding = () => {
                 }}>
                     <PiPlus />
                 </CreateGraphButton>
-                {graphs.map(() => {
-                    return 
+                {graphs.map((g) => {
+                    console.log("g", g)
+                    return <GraphTileButton
+                        onClick={() => {
+                            navigate("/graph/" + g.graph_id);
+                        }}
+                    >
+                        <div style={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center"
+                        }}>
+                            {emoji.get(g.icon)}
+                            <GraphTileTitle>
+                                {g.name}
+                            </GraphTileTitle>
+                        </div>
+                    </GraphTileButton>
                 })}
             </ObjectsContainer>
         </CenteredContentInterior>

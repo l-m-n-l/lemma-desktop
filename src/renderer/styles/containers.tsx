@@ -318,6 +318,9 @@ export const PageTextHeaderContainer = styled.div`
 
 export const ObjectsContainer = styled.div`
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 `;
 
 export const CreateGraphModalContainer = styled.div`
