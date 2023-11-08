@@ -43,7 +43,8 @@ export interface DataStoreContextProps {
 
 export enum DataStores {
     user = "user",
-    offline = "offline"
+    offline = "offline",
+    graphs = "graphs"
 }
 
 export interface NeDBArgType {

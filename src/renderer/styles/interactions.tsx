@@ -311,6 +311,26 @@ export const GraphTitleButton = styled.button`
 
     &:hover {
         background-color: rgb(0, 0, 0, 0.1);
-        transition: all 0.3s ease 0.1s;         
+        transition: all 0.3s ease 0.1s;
     }
 `;
+
+export const CreateGraphButton = styled.button`
+    width: 9rem;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: darkgray;
+
+    &:hover {
+        border-radius: 3rem;
+        background-color: rgb(0, 0, 0, 0.75);
+        transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const GraphTileButton = styled.button``;

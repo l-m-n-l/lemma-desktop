@@ -300,3 +300,49 @@ export const GraphInfoContainer = styled.div`
     display: flex;
     align-items: center;
 `;
+
+export const CenteredContentInterior = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 65rem;
+    height: 100%;
+`;
+
+export const PageTextHeaderContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 0.3rem;
+`;
+
+export const ObjectsContainer = styled.div`
+    width: 100%;
+`;
+
+export const CreateGraphModalContainer = styled.div`
+    width: 50rem;
+    height: 50rem;
+    background-color: white;
+    position: absolute;
+    z-index: 301;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+`;
+
+export const ModalBackDrop = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.25);
+    position: absolute;
+    left: 0;
+    top: 0;
+`;
+
+export const CreateGraphModalHeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;

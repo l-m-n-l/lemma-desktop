@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { config, useSpring } from 'react-spring';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ShareModalContainer } from '../../styles/containers';
 
@@ -7,11 +8,23 @@ import { ModalContext } from '../../../providers/ModalProvider';
 import { ModalType } from '../../../types/contexts';
 
 const ShareModal = () => {
+    const tabs = useSelector((state) => state.tabs.tabs);
+    const selectedTabId = useSelector((state) => state.tabs.selectedTabId);
+    const {
+        state: {
+            modal: {
+                isOpen,
+                type,
+                data
+            }
+        }
+    } = tabs[selectedTabId];
+
     const [mode, setMode] = useState<"share" | "publish">("share");
 
     const modalContext = useContext(ModalContext);
     const fade = useSpring({
-        opacity: (modalContext?.vars.type === ModalType.share && modalContext?.vars.isOpen) ? 1 : 0,
+        opacity: (type === ModalType.share && isOpen) ? 1 : 0,
         config: config.wobbly
     });
 
@@ -30,7 +43,7 @@ const ShareModal = () => {
         };
     }, [modalContext]);
 
-    return (modalContext?.vars.type === ModalType.share && modalContext?.vars.isOpen) ? <ShareModalContainer style={fade} ref={modalRef}>
+    return (type === ModalType.share && isOpen) ? <ShareModalContainer style={fade} ref={modalRef}>
 
     </ShareModalContainer> : <></>
 };

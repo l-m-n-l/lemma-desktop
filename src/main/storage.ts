@@ -50,9 +50,15 @@ export const OfflineDataStore = new Datastore({
     // }
 });
 
+export const GraphDataStore = new Datastore({
+    filename: `${process.env.NODE_ENV === 'development' ? '.' : app.getAppPath()}/data/graphs.db`,
+    autoload: true,
+})
+
 const stores = {
     user: UserDataStore,
-    offline: OfflineDataStore
+    offline: OfflineDataStore,
+    graphs: GraphDataStore
 }
 
 export const createNeDBDocument = (ds: DataStores, document: any) => {
@@ -91,6 +97,16 @@ export const findNeDBDocument = (ds: DataStores, query: any) => {
         data_store.find(query, {}, (err, docs) => {
             if(err) reject(err)
             resolve(docs)
+        })
+    })
+}
+
+export const deleteAllNeDBDocuments = (ds: DataStores) => {
+    return new Promise((resolve, reject) => {
+        const data_store = stores[ds];
+        data_store.remove({}, { multi: true }, (err, numRemoved) => {
+            if(err) reject(err);
+            resolve(numRemoved);
         })
     })
 }

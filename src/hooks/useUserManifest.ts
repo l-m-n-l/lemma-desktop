@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { DataStoreContext } from '../providers/DataStoreProvider';
 import { DataStores } from '../types/storage';
@@ -21,7 +21,7 @@ const useUserManifest = () => {
     const _NeDBFunctions = _DataStoreContext?.NeDBFunctions;
     const _ContextFunctions = _DataStoreContext?.ContextFunctions;
 
-    useEffect(() => {
+    useMemo(() => {
         _ContextFunctions?.setIsUserDataLoading(true);
 
         let fetchData: Function;
@@ -38,9 +38,6 @@ const useUserManifest = () => {
                     time
                 }
             } = _UserManifest;
-
-            _ContextFunctions?.setIsUserDataLoading(false);
-            _ContextFunctions?.setIsLoggedIn(true);
         }
 
         else {
@@ -48,10 +45,36 @@ const useUserManifest = () => {
                 // Fetch current stored user manifest
                 const _currentUserManifest = await _NeDBFunctions?.findDocument(DataStores.user, {});
 
-                console.log("currentUserManifest", _currentUserManifest);
+                if(_currentUserManifest.length > 0) {
+                    const {
+                        authorization,
+                        time
+                    } = _currentUserManifest.sort((a, b) => {
+                        return a.time - b.time
+                    })[0];
 
-                _ContextFunctions?.setIsUserDataLoading(false);
-                _ContextFunctions?.setIsLoggedIn(!(_currentUserManifest.length === 0));
+                    console.log({
+                        authorization,
+                        time
+                    })
+
+                    if(Date.now() - time > 30 * 86400) {
+                        _ContextFunctions?.setIsUserDataLoading(false);
+                        _ContextFunctions?.setIsLoggedIn(false);
+                        return;
+                    }
+
+                    else {
+                        _ContextFunctions?.setIsUserDataLoading(false);
+                        _ContextFunctions?.setIsLoggedIn(true);
+                        window.localStorage.setItem("_authorization", _currentUserManifest[0].authorization);
+                    }
+                }
+
+                else {
+                    _ContextFunctions?.setIsUserDataLoading(false);
+                    _ContextFunctions?.setIsLoggedIn(false);
+                }
             }
 
             fetchData();

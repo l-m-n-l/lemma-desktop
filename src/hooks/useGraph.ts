@@ -4,7 +4,7 @@ import {
     useLazyFindGraphQuery
 } from '../providers/redux/services/graph';
 
-const useGraph = (graphId: string) => {
+const useGraph = (graphId: string | undefined) => {
     const dispatch = useDispatch();
     const cachedGraph = useSelector((state) => state.graph.graphs[graphId]);
 
