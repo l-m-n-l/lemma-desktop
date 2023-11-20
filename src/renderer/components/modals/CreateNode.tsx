@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import * as emoji from 'node-emoji';
-import { PiArrowLeftBold, PiPlus, PiPlusBold, PiX, PiXBold, PiGitBranchBold, PiFolderFill, PiFilePlusFill } from 'react-icons/pi';
+import { PiArrowLeftBold, PiPlus, PiPlusBold, PiX, PiXBold, PiGitBranchBold, PiFolderFill, PiFilePlusFill, PiLinkBold, PiTrashBold } from 'react-icons/pi';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import useGraph from '../../../hooks/useGraph';
@@ -27,23 +27,7 @@ const CreateSpace = ({ ...props }) => {
             paddingTop: "2rem",
             paddingBottom: "2rem"
         }}>
-            <CreateNodeSourceButton
-                data-tooltip-content={"From Repository"} 
-                data-tooltip-id={"info-tooltip-5"}
-            >
-                <PiGitBranchBold />
-            </CreateNodeSourceButton>
-            <CreateNodeSourceButton
-                data-tooltip-content={"From Local Folder"} 
-                data-tooltip-id={"info-tooltip-5"}
-            >
-                <PiFolderFill />
-            </CreateNodeSourceButton>
-            <ReactTooltip 
-                style={{ fontFamily: "Roboto, sans-serif", backgroundColor: "black", color: "white" }} 
-                place={"bottom"} 
-                id={"info-tooltip-5"}
-            />
+
         </div>
     </ModalContent>
 }
@@ -59,38 +43,24 @@ const CreateNotebook = ({ ...props }) => {
         <div style={{
             width: "100%",
             display: "flex",
-            justifyContent: 'center',
-            gap: "1rem",
-            paddingTop: "2rem",
-            paddingBottom: "2rem"
+            flexDirection: "column"
         }}>
-            <CreateNodeSourceButton
-                data-tooltip-content={"New Notebook"} 
-                data-tooltip-id={"info-tooltip-5"}
-                onClick={() => {
-                    setIsValid(true);
-                }}
-                isValid={newNotebookSelected}
-            >
-                <PiFilePlusFill />
+            <CreateNodeSourceButton>
+                <PiLinkBold />
+                From Link
             </CreateNodeSourceButton>
-            <CreateNodeSourceButton
-                data-tooltip-content={"From Repository"} 
-                data-tooltip-id={"info-tooltip-5"}
-            >
-                <PiGitBranchBold />
-            </CreateNodeSourceButton>
-            <CreateNodeSourceButton
-                data-tooltip-content={"From Local Folder"} 
-                data-tooltip-id={"info-tooltip-5"}
-            >
+            <CreateNodeSourceButton>
                 <PiFolderFill />
+                From Local
             </CreateNodeSourceButton>
-            <ReactTooltip 
-                style={{ fontFamily: "Roboto, sans-serif", backgroundColor: "black", color: "white" }} 
-                place={"bottom"} 
-                id={"info-tooltip-5"}
-            />
+            <CreateNodeSourceButton>
+                <PiPlusBold />
+                Blank Note Book
+            </CreateNodeSourceButton>
+            <CreateNodeSourceButton>
+                <PiTrashBold />
+                Cancel
+            </CreateNodeSourceButton>
         </div>
     </ModalContent>
 }
@@ -108,51 +78,28 @@ const _createNodeModal = ({ graph, node, setModalState }) => {
     const sources = ["git"];
 
     return <>
-        <ModalBackDrop onClick={() => {
+        <ModalBackDrop style={{backgroundColor: "transparent"}} onClick={() => {
             setModalState(null, false, null);
         }} />
-        <CreateNodeModalContainer>
-            <ModalHeader style={{
-                justifyContent: "right"
-            }}>
-                {/* <CloseModalButton onClick={() => setModalState(null, false, null)}>
-                    <PiArrowLeftBold />
-                </CloseModalButton> */}
-
-                <CloseModalButton onClick={() => setModalState(null, false, null)}>
-                    <PiXBold />
-                </CloseModalButton>
-            </ModalHeader>
+        <CreateNodeModalContainer style={{
+            left: node.x + 100 + "px",
+            top: node.y + "px",
+        }}>
             <div style={{
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
-                boxSizing: "border-box",
-                gap: "1rem",
-                paddingLeft: "1rem",
-                paddingRight: "1rem"
+                boxSizing: "border-box"
             }}>
                 <div style={{
                     position: "relative"
                 }}>
-                    <CreateNodeIconButton isValid={iconDropdownSelected} onClick={() => setIconDropdownSelected(!iconDropdownSelected)}>{emoji.get(icon)}</CreateNodeIconButton>
+                    <CreateNodeIconButton style={{ fontSize: "1rem", width: "2rem" }} isValid={iconDropdownSelected} onClick={() => setIconDropdownSelected(!iconDropdownSelected)}>{emoji.get(icon)}</CreateNodeIconButton>
                     {(iconDropdownSelected) ? <IconSelection icon={icon} setIcon={setIcon} setIsOpen={setIconDropdownSelected} /> : <></>}
                 </div>
-                <CreateNodeNameInput placeholder={name} onChange={(e) => setName(e.target.value)} value={name} />
+                <CreateNodeNameInput style={{ fontSize: "0.75rem" }} placeholder={name} onChange={(e) => setName(e.target.value)} value={name} />
             </div>
             {(node.type === "space") ? <CreateSpace setIsValid={setIsValid} /> : <CreateNotebook setIsValid={setIsValid} />}
-            <div style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "right",
-                boxSizing: "border-box",
-                padding: "1rem"
-            }}>
-                <CreateNodeButton isValid={isValid}>
-                    <PiPlusBold />
-                    {(node.type === "notebook") ? "Note Book" : "Space"}
-                </CreateNodeButton>
-            </div>
         </CreateNodeModalContainer>
     </>
 }

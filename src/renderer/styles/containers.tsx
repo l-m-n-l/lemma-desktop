@@ -373,14 +373,13 @@ export const GraphIconContainer = styled.div`
 `;
 
 export const CreateNodeModalContainer = styled.div`
-    min-width: 30rem;
+    min-width: 15rem;
     background-color: white;
     position: absolute;
     z-index: 320;
-    border-radius: 1rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 0.5rem;
 `;
 
 export const ModalHeader = styled.div`
@@ -393,8 +392,6 @@ export const ModalHeader = styled.div`
 
 export const ModalContent = styled.div`
     box-sizing: border-box;
-    padding-left: 1rem;
-    padding-right: 1rem;
 `;
 
 export const DropdownContainer = styled.div`

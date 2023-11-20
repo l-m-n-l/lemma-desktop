@@ -112,23 +112,26 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
         });
-        // const newNode = {
-        //   id: getId(),
-        //   type,
-        //   position,
-        //   data: {
-        //       icon,
-        //       title
-        //   },
-        // };
+        
+        const newNode = {
+          id: getId(),
+          type,
+          position,
+          data: {
+              icon,
+              title
+          },
+        };
 
         setModalState(ModalType.createNode, true, {
             icon,
             title,
-            type
+            type,
+            x: event.clientX,
+            y: event.clientY
         });
   
-        // setNodes((nds) => nds.concat(newNode));
+        setNodes((nds) => nds.concat(newNode));
     }, [reactFlowInstance]);
 
     const onNodeClick = (event, element) => {

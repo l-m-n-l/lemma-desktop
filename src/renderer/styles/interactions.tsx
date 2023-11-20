@@ -360,11 +360,15 @@ export const CloseModalButton = styled.button`
 export const CreateNodeIconButton = styled.button`
     width: 2rem;
     aspect-ratio: 1 / 1;
-    background-color: transparent;
-    border: none;
+    background-color: whitesmoke;
     outline: none;
     cursor: pointer;
-    border-radius: 0.5rem;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+    border-left: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: none;
 
     &:hover {
         background-color: rgb(0, 0, 0, 0.1);
@@ -374,28 +378,29 @@ export const CreateNodeIconButton = styled.button`
 
 export const CreateNodeNameInput = styled.input`
     flex: 1;
-    outline: none;
-    border: none;
+    border: 1px solid lightgray;
     font-size: 1rem;
+    padding: 0.5rem;
+    background-color: whitesmoke;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    outline: none;
 `;
 
 export const CreateNodeSourceButton = styled.button<InteractionsProps>`
-    width: 7rem;
-    aspect-ratio: 1 / 1;
-    font-size: 2rem;
+    width: 100%;
+    font-size: 0.75rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1.5rem;
     background-color: white;
     outline: none;
-    border: 1px solid lightgray;
+    border: none;
     cursor: pointer;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    color: gray;
 
     &:hover {
-        background-color: black;
-        color: white;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        background-color: #efefef;
         transition: all 0.3s ease 0.1s;
     }
 `;
