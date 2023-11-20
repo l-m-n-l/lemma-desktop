@@ -2,7 +2,8 @@ export enum ModalType {
     signout = "signout",
     share = "share",
     nodeHover = "nodeHover",
-    newGraph = "newGraph"
+    newGraph = "newGraph",
+    createNode = "createNode"
 }
 
 export interface ModalDataType {

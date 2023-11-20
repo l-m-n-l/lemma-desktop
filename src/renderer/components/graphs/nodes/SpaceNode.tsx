@@ -29,24 +29,10 @@ const NoteBookNode = ({ data }) => {
                 }}
                 onMouseEnter={(e) => {
                     setTitleProps({ y: 5 });
-                    modalContext?.fns.setModalType("nodeHover");
-                    modalContext?.fns.setIsOpen(true);
-                    modalContext?.fns.setClientX(e.clientX);
-                    modalContext?.fns.setClientY(e.clientY);
                     setButtonProps({ scale: 1.1 });
-                }}
-                onMouseMove={(e) => {
-                    modalContext?.fns.setModalType("nodeHover");
-                    modalContext?.fns.setIsOpen(true);
-                    modalContext?.fns.setClientX(e.clientX);
-                    modalContext?.fns.setClientY(e.clientY);
                 }}
                 onMouseLeave={() => {
                     setTitleProps({ y: 0 })
-                    modalContext?.fns.setModalType(null);
-                    modalContext?.fns.setIsOpen(false);
-                    modalContext?.fns.setClientX(null);
-                    modalContext?.fns.setClientY(null);
                     setButtonProps({ scale: 1 })
                 }}
             >

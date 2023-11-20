@@ -11,6 +11,7 @@ import {
     useCreateGraphMutation
 } from '../providers/redux/services/graph';
 import { useNavigate } from 'react-router-dom';
+import { updateTabInfo } from '../providers/redux/slicers/tabs';
 
 const useGraphs = () => {
     const navigate = useNavigate();
@@ -55,15 +56,25 @@ const useGraphs = () => {
             icon
         });
 
-        if(createGraphFlags.isSuccess) {
-            const new_graph = results.graph;
+        console.log("create_graph_results", results)
 
-            await _NeDBFunctions?.createDocument(DataStores.graphs, {
-                ...new_graph
-            });
+        console.log("isSuccess", createGraphFlags)
 
-            navigate("/graph/" + new_graph.graph_id);
-        }
+        const new_graph = results.data.graph;
+
+        await _NeDBFunctions?.createDocument(DataStores.graphs, {
+            ...new_graph
+        });
+
+        navigate("/graph/" + new_graph.graph_id);
+
+        dispatch(updateTabInfo({
+            tabIcon: icon,
+            tabTitle: name,
+            tabURI: "/graph/" + new_graph.graph_id
+        }));
+
+        return results
     };
     
     return {

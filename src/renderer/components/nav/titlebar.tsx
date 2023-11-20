@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaAnglesUp } from 'react-icons/fa6';
+import { FaAnglesDown, FaAnglesUp } from 'react-icons/fa6';
 import { sendIPCMessage } from '../../../helpers/ipcmanager';
 import { IPCChannel } from '../../../types/ipc';
 
@@ -12,19 +12,26 @@ import {
 import TabsNav from './tabs';
 
 const TitleBar = () => {
+    const [isMinimized, setIsMinimized] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
     
     return <TitleBarContainer onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
         <TitleDragContainer></TitleDragContainer>
         <TitleBarInterior>
             <WindowButtonGroup />
-            <TabsNav />
-            <DocumentMenuButtons />
+            {
+                (!isMinimized) ? 
+                    <>
+                        <TabsNav />
+                        <DocumentMenuButtons />
+                    </>
+                : <></>
+            }
         </TitleBarInterior>
         {
             (isHovering) ? 
-                <MinimizeTitleBarButton>
-                    <FaAnglesUp />
+                <MinimizeTitleBarButton onClick={() => setIsMinimized(!isMinimized)}>
+                    {(isMinimized) ? <FaAnglesDown /> : <FaAnglesUp />}
                 </MinimizeTitleBarButton>
             : <></>
         }

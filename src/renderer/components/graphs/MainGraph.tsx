@@ -13,9 +13,20 @@ import FooterSearch from '../search/footer';
 import NoteBookNode from './nodes/NotebookNode';
 import SpaceNode from './nodes/SpaceNode';
 import GraphNav from '../nav/graph';
+import useTabs from '../../../hooks/useTabs';
+import { ModalType } from '../../../types/contexts';
 
 interface MainGraphProps {
-
+    graph: {
+        data: {
+            nodes: Array<any>,
+            name: string
+            icon: string
+            edges: Array<any>
+            permissions: Array<any>
+        },
+        fns: Object
+    }
 }
 
 const initialNodes = [
@@ -50,12 +61,20 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const MainGraph = ({ ...props }: MainGraphProps) => {
+    console.log("graphProps", props);
+
+    const {
+        fns: {
+            setModalState
+        }
+    } = useTabs();
+
     const modalContext = useContext(ModalContext);
 
     const reactFlowWrapper = useRef(null);
 
-    const [nodes, setNodes] = useState([]);
-    const [edges, setEdges] = useState([]);
+    const [nodes, setNodes] = useState(props.graph.data.nodes);
+    const [edges, setEdges] = useState(props.graph.data.edges);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
     // @ts-ignore
@@ -93,17 +112,23 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
         });
-        const newNode = {
-          id: getId(),
-          type,
-          position,
-          data: {
-              icon,
-              title
-          },
-        };
+        // const newNode = {
+        //   id: getId(),
+        //   type,
+        //   position,
+        //   data: {
+        //       icon,
+        //       title
+        //   },
+        // };
+
+        setModalState(ModalType.createNode, true, {
+            icon,
+            title,
+            type
+        });
   
-        setNodes((nds) => nds.concat(newNode));
+        // setNodes((nds) => nds.concat(newNode));
     }, [reactFlowInstance]);
 
     const onNodeClick = (event, element) => {
@@ -120,8 +145,8 @@ const MainGraph = ({ ...props }: MainGraphProps) => {
 
     return <ContentContainer ref={reactFlowWrapper}>
         <GraphNav 
-            graphIcon={"unicorn"}
-            graphTitle={"This is a Graph"}
+            graphIcon={props.graph.data.icon}
+            graphTitle={props.graph.data.name}
         />
         <ReactFlow
             nodes={nodes}

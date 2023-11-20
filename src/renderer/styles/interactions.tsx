@@ -62,7 +62,7 @@ export const SideNavButton = styled.button<InteractionsProps>`
 export const NoBorderInput = styled.input`
     width: 100%;
     font-family: Roboto, sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     border: none;
     outline: none;
     user-select: none;
@@ -316,14 +316,14 @@ export const GraphTitleButton = styled.button`
 `;
 
 export const CreateGraphButton = styled.button`
-    width: 9rem;
-    aspect-ratio: 1 / 1;
+    width: 3rem;
+    height: 3rem;
     background-color: rgb(0, 0, 0, 0.1);
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     outline: none;
     border: none;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1rem;
     color: darkgray;
 
     &:hover {
@@ -334,17 +334,80 @@ export const CreateGraphButton = styled.button`
 `;
 
 export const GraphTileButton = styled.button`
-    width: 9rem;
-    aspect-ratio: 1 / 1;
+    width: 100%;
     background-color: white;
-    border-radius: 2rem;
+    border-radius: 1rem;
     outline: none;
     border: none;
     cursor: pointer;
-    font-size: 3rem;
+    box-sizing: border-box;
+    padding: 1rem;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, 0.05);
+        transition: all 0.3s ease 0.1s;
+    }
+`;
+
+export const CloseModalButton = styled.button`
+    background-color: transparent;
+    color: gray;
+    border: none;
+    outline: none;
+    cursor: pointer;
+`;
+
+export const CreateNodeIconButton = styled.button`
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
 
     &:hover {
         background-color: rgb(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0.1s;         
+    }
+`;
+
+export const CreateNodeNameInput = styled.input`
+    flex: 1;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+`;
+
+export const CreateNodeSourceButton = styled.button<InteractionsProps>`
+    width: 7rem;
+    aspect-ratio: 1 / 1;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    background-color: white;
+    outline: none;
+    border: 1px solid lightgray;
+    cursor: pointer;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         transition: all 0.3s ease 0.1s;
     }
+`;
+
+export const CreateNodeButton = styled.button<InteractionsProps>`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.2rem;
+    border: none;
+    outline: none;
+    background-color: ${(props) => (props.isValid) ? "black" : "whitesmoke"};
+    color: ${(props) => (props.isValid) ? "white" : "gray"};
 `;

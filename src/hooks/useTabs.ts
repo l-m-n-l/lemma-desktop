@@ -37,7 +37,7 @@ const useTabs = () => {
         }));
     };
 
-    const setModalState = (type: ModalType, isOpen: boolean, data: any) => {
+    const setModalState = (type: ModalType | null, isOpen: boolean, data: any) => {
         dispatch(reduxSetModalState({
             type,
             isOpen,

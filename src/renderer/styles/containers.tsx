@@ -71,6 +71,7 @@ export const ContentContainer = styled.div`
     flex: 1;
     height: 100%;
     position: relative;
+    overflow-y: scroll;
 `;
 
 export const FooterContainer= styled.div`
@@ -83,10 +84,10 @@ export const FooterContainer= styled.div`
 
 export const FooterSearchContainer = styled.form`
     width: 50%;
-    padding: 0.75rem;
+    padding: 0.5rem;
     background-color: white;
     border: 1px solid lightgray;
-    border-radius: 1rem;
+    border-radius: 0.6rem;
     display: flex;
     margin-bottom: 1rem;
 `;
@@ -312,13 +313,13 @@ export const PageTextHeaderContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
     gap: 0.3rem;
 `;
 
 export const ObjectsContainer = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
 `;
@@ -342,6 +343,7 @@ export const ModalBackDrop = styled.div`
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 319;
 `;
 
 export const CreateGraphModalHeaderContainer = styled.div`
@@ -349,3 +351,61 @@ export const CreateGraphModalHeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 `;
+
+export const PageHeaderContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+`;
+
+export const GraphIconContainer = styled.div`
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+`;
+
+export const CreateNodeModalContainer = styled.div`
+    min-width: 30rem;
+    background-color: white;
+    position: absolute;
+    z-index: 320;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+export const ModalHeader = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 1rem;
+`;
+
+export const ModalContent = styled.div`
+    box-sizing: border-box;
+    padding-left: 1rem;
+    padding-right: 1rem;
+`;
+
+export const DropdownContainer = styled.div`
+    position: absolute;
+`;
+
+export const IconSelectionContainer = styled(DropdownContainer)`
+    width: 20rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 1px solid lightgray;
+    background-color: white;
+    top: 120%;
+    border-radius: 1rem;
+`

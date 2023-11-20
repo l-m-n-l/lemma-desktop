@@ -63,9 +63,9 @@ const tabSlice = createSlice({
 
         updateTabInfo: (state, action) => {
             const current_tabs = [...state.tabs];
-            current_tabs[state.selectedTabId].tabIcon = action.payload.tabIcon;
-            current_tabs[state.selectedTabId].tabTitle = action.payload.tabTitle;
-            current_tabs[state.selectedTabId].tabURI = action.payload.tabURI;
+            current_tabs[state.selectedTabId].tabIcon = (action.payload.tabIcon) ? action.payload.tabIcon : current_tabs[state.selectedTabId].tabIcon;
+            current_tabs[state.selectedTabId].tabTitle = (action.payload.tabTitle) ? action.payload.tabTitle : current_tabs[state.selectedTabId].tabTitle;
+            current_tabs[state.selectedTabId].tabURI = (action.payload.tabURI) ? action.payload.tabURI : current_tabs[state.selectedTabId].tabURI;
             state.tabs = current_tabs;
         },
 

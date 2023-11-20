@@ -9,10 +9,11 @@ export const graphApi = emptySplitApi.injectEndpoints({
         */
         findGraph: builder.query({
             query: (params) => {
+                console.log("find_graph_params", params)
                 return {
                     url: BASE_URI + "find",
                     method: "GET",
-                    query: params,
+                    params: params,
                     headers: {
                         authorization: window.localStorage.getItem("_authorization")
                     }

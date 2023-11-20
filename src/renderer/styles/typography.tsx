@@ -27,5 +27,11 @@ export const PageTextSubHeader = styled.a`
 
 export const GraphTileTitle = styled.a`
     font-family: Roboto, sans-serif;
+    font-size: 1rem;
+`;
+
+export const GraphTileSubheader = styled.a`
+    font-family: Roboto, sans-serif;
     font-size: 0.75rem;
+    color: gray;
 `;
